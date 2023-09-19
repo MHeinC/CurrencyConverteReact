@@ -1,3 +1,91 @@
-select {
-    width: 50px;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 2rem;
+    color: white;
+    background-image: url("assets/adelin-preda--tOr_T4qTpQ-unsplash.jpg"); 
+    background-size: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.2em;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 2.2em;
+    margin: 2.2em;
+    align-content: center;
+    align-items: last baseline;
+}
+
+.dropdown {
+    width: 20vw;
+    margin-bottom: 1.4em;
+}
+
+.dropdown div{
+    border-radius: 0.4em;
+    color: #182848;
+    font-weight: 700;
+}
+
+input {
+    color: white;
+    font-size: 1.2rem;
+    background-color: transparent;
+    text-align: center;
+    width: 30vw;
+    border-right: 0;
+    border-top: 0;
+    border-left: 0;
+    border-color: white;
+    padding-right: 0.8em;
+    padding-top: 0em;
+    padding-bottom: 0.5em;
+}
+
+input:focus {
+    font-size: 1.4rem;
+    border-radius: 0.4em;
+    border-bottom: none;
+    font-weight: 700;
+    padding-top: 0.5em;
+}
+
+button {
+    width: 20vw;
+    align-self: center;  
+    padding: 0.6em 1em;
+    border-radius: 0.4em;
+    margin: 1em 0;
+    color: #182848;
+    cursor: pointer;
+    border: none;
+}
+
+p { 
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 2em;
+    text-align: center;
+}
+
+@media min-width(800px) {
+    background-color: red;
 }

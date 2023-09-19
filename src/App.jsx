@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import WährungBetragBlock from './WährungBetragBlock'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsLeftRight } from '@fortawesome/free-solid-svg-icons'
 function App() {
 
   const [ausgangsCurrency, setAusgangsCurrency] = useState("EUR")
@@ -16,6 +18,7 @@ function App() {
    setAndereCurrency(e.value)
   }
 
+
   useEffect(() => {
       fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_fah6bqBLJBnkdtiUUhZqtAU63TNdYu3dKb0fW8nB&currencies=&base_currency=${ausgangsCurrency}`)
       .then(res => res.json())
@@ -31,13 +34,19 @@ function App() {
   function handleAusgangsBetrag(e) {
       setAusgangsCurrencyBetrag(e.target.value)
   }
+
+  function handleBtnClick() {
+    console.log("hello")
+  }
   
   return (
     <>
       <h1>Currency Converter</h1>  
-      <WährungBetragBlock change={selectAusgangsCurrency} handle={handleAusgangsBetrag} ausgang={ausgangsCurrency} value={ausgangsCurrencyBetrag}/>
-      <button>Pfeil</button>
-      <WährungBetragBlock change={selectZielCurrency} ausgang={andereCurrency} value={andereCurrencyBetrag}/>
+      <div className="main-container">
+        <WährungBetragBlock change={selectAusgangsCurrency} handle={handleAusgangsBetrag} ausgang={ausgangsCurrency} value={ausgangsCurrencyBetrag}/>
+        <button onClick={handleBtnClick}><FontAwesomeIcon icon={faArrowsLeftRight} rotation={90} size="lg" /></button>
+        <WährungBetragBlock change={selectZielCurrency} ausgang={andereCurrency} value={andereCurrencyBetrag}/>
+      </div>
       <p>{Number(ausgangsCurrencyBetrag).toLocaleString("de-DE")} {ausgangsCurrency} = {andereCurrencyBetrag.toLocaleString("de-DE")} {andereCurrency}</p>
     </>
   )

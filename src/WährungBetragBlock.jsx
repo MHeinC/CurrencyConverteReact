@@ -12,8 +12,8 @@ export default function WährungBetragBlock(props) {
     return (
       <>
         <form>
-          <Dropdown className= "dropdown" options={options} onChange={props.change} value={props.ausgang} placeholder="Select an option" />
           <input type="number" onChange={(e) => props.handle(e)} value={props.value}/>
+          <Dropdown className="dropdown" options={options} onChange={props.change} value={props.ausgang} placeholder="Select an option" />
         </form>
       </>
     );
