@@ -66,6 +66,7 @@ input:focus {
     border-bottom: none;
     font-weight: 700;
     padding-top: 0.5em;
+    color:white;
 }
 
 button {
@@ -86,6 +87,3 @@ p {
     text-align: center;
 }
 
-@media min-width(800px) {
-    background-color: red;
-}

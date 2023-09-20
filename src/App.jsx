@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import WährungBetragBlock from './WährungBetragBlock'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsLeftRight } from '@fortawesome/free-solid-svg-icons'
+
 function App() {
 
   const [ausgangsCurrency, setAusgangsCurrency] = useState("EUR")
@@ -17,7 +18,6 @@ function App() {
   function selectZielCurrency(e) {
    setAndereCurrency(e.value)
   }
-
 
   useEffect(() => {
       fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_fah6bqBLJBnkdtiUUhZqtAU63TNdYu3dKb0fW8nB&currencies=&base_currency=${ausgangsCurrency}`)
@@ -36,7 +36,8 @@ function App() {
   }
 
   function handleBtnClick() {
-    console.log("hello")
+    setAusgangsCurrency(andereCurrency)
+    setAndereCurrency(ausgangsCurrency)
   }
   
   return (
