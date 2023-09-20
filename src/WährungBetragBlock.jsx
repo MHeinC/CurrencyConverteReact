@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
@@ -12,8 +11,8 @@ export default function WährungBetragBlock(props) {
     return (
       <>
         <form>
-          <input type="number" onChange={(e) => props.handle(e)} value={props.value}/>
-          <Dropdown className="dropdown" options={options} onChange={props.change} value={props.ausgang} placeholder="Select an option" />
+          <input type="number" onChange={(e) => props.handleAmountChange(e)} value={props.value}/>
+          <Dropdown className="dropdown" options={options} onChange={props.currencyChange} value={props.selectedCurrency} placeholder="Select an option" />
         </form>
       </>
     );

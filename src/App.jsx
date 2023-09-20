@@ -5,50 +5,50 @@ import { faArrowsLeftRight } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
 
-  const [ausgangsCurrency, setAusgangsCurrency] = useState("EUR")
-  const [andereCurrency, setAndereCurrency] = useState("USD")
-  const [ausgangsCurrencyBetrag, setAusgangsCurrencyBetrag] = useState(0)
-  const [andereCurrencyBetrag, setAndereCurrencyBetrag] = useState(0)
-  const [umrechnungsKurs, setUmrechnungskurs] = useState(0)
+  const [initialCurrency, setInitialCurrency] = useState("EUR")
+  const [targetCurrency, setTargetCurrency] = useState("USD")
+  const [initialAmount, setInitialAmount] = useState(0)
+  const [targetAmount, setTargetAmount] = useState(0)
+  const [conversionRate, setConversionRate] = useState(0)
 
-  function selectAusgangsCurrency(e) {
-    setAusgangsCurrency(e.value)
+  function selectInitialCurrency(e) {
+    setInitialCurrency(e.value)
   }
 
-  function selectZielCurrency(e) {
-   setAndereCurrency(e.value)
+  function selectTargetCurrency(e) {
+   setTargetCurrency(e.value)
   }
 
   useEffect(() => {
-      fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_fah6bqBLJBnkdtiUUhZqtAU63TNdYu3dKb0fW8nB&currencies=&base_currency=${ausgangsCurrency}`)
+      fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_fah6bqBLJBnkdtiUUhZqtAU63TNdYu3dKb0fW8nB&currencies=&base_currency=${initialCurrency}`)
       .then(res => res.json())
       .then(data => {
-        setUmrechnungskurs(data.data[andereCurrency])
+        setConversionRate(data.data[targetCurrency])
       })
-  },[ausgangsCurrency, andereCurrency])
+  },[initialCurrency, targetCurrency])
 
   useEffect(() => {
-    setAndereCurrencyBetrag(Math.round((ausgangsCurrencyBetrag * umrechnungsKurs)* 1000)/1000)
-  },[umrechnungsKurs, ausgangsCurrencyBetrag])
+    setTargetAmount(Math.round((initialAmount * conversionRate)* 1000)/1000)
+  },[conversionRate, initialAmount])
 
-  function handleAusgangsBetrag(e) {
-      setAusgangsCurrencyBetrag(e.target.value)
+  function handleInitialAmount(e) {
+      setInitialAmount(e.target.value)
   }
 
   function handleBtnClick() {
-    setAusgangsCurrency(andereCurrency)
-    setAndereCurrency(ausgangsCurrency)
+    setInitialCurrency(targetCurrency)
+    setTargetCurrency(initialCurrency)
   }
   
   return (
     <>
       <h1>Currency Converter</h1>  
       <div className="main-container">
-        <WährungBetragBlock change={selectAusgangsCurrency} handle={handleAusgangsBetrag} ausgang={ausgangsCurrency} value={ausgangsCurrencyBetrag}/>
+        <WährungBetragBlock currencyChange={selectInitialCurrency} handleAmountChange={handleInitialAmount} selectedCurrency={initialCurrency} value={initialAmount}/>
         <button onClick={handleBtnClick}><FontAwesomeIcon icon={faArrowsLeftRight} rotation={90} size="lg" /></button>
-        <WährungBetragBlock change={selectZielCurrency} ausgang={andereCurrency} value={andereCurrencyBetrag}/>
+        <WährungBetragBlock currencyChange={selectTargetCurrency} selectedCurrency={targetCurrency} value={targetAmount}/>
       </div>
-      <p>{Number(ausgangsCurrencyBetrag).toLocaleString("de-DE")} {ausgangsCurrency} = {andereCurrencyBetrag.toLocaleString("de-DE")} {andereCurrency}</p>
+      <p>{Number(initialAmount).toLocaleString("de-DE")} {initialCurrency} = {targetAmount.toLocaleString("de-DE")} {targetCurrency}</p>
     </>
   )
 }
